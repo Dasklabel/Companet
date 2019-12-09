@@ -7,7 +7,7 @@ public class Comment_c_a {
 	private String name;
 	private String password;
 	private String content;
-	private Date date;
+	private String date;
 	private int ref;
 	
 	public int getId() {
@@ -34,10 +34,10 @@ public class Comment_c_a {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public int getRef() {

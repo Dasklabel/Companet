@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +7,11 @@
 <meta name="viewport" content="width=device-width", initial-scale="1">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+<script type="text/javascript">
+function openWin() {
+	window.open("help.jsp", "도움말", "width=680, height=600, toolbar=no, menubar=no, scrollbar=no, resizable=yes");
+}
+</script>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -26,7 +30,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="nav-item">
-					<a class="nav-link" href="#">도움말</a>
+					<a class="nav-link" onclick="openWin();">도움말</a>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle"
@@ -46,7 +50,7 @@
 		<div class="col-xs-4" style="border:1.5px dashed gray">
 			<table>
 				<tr>
-					<td><h3>소개</h3> Companet은 기업 내 인력을 타 기업과 연결해주는 서비스입니다.</td>
+					<td><h3>소개</h3> Companet은 기업 내 인력을 타 기업과 연결해주는 플랫폼입니다.</td>
 				</tr>
 				<tr>
 					<td><hr></td>
@@ -66,9 +70,9 @@
 				<tr>
 					<td><hr></td>
 				</tr>
-			</table>
-				
+			</table>			
 		</div>
+		
 		<div class="col-xs-4"></div>
 		<div class="col-xs-4"></div>
 		<div class="col-xs-4"><span class="pull-right"></span>

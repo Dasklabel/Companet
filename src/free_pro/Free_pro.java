@@ -46,9 +46,4 @@ public class Free_pro {
 	public void setFree_pro_Available(int free_pro_Available) {
 		this.free_pro_Available = free_pro_Available;
 	}
-	
-	
-	
-	
-	
 }

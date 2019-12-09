@@ -6,93 +6,101 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width", initial-scale="1">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+<title>Companet</title>
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/small-business.css" rel="stylesheet">
+<script type="text/javascript" src="httpRequest.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+function openWin() {
+	window.open("sendMessage.jsp", "쪽지 보내기", "width=800, height=700, toolbar=no, menubar=no, scrollbar=no, resizable=yes");
+}
+</script>
 </head>
 <body>
+	
 	<%
 		String userID = null;
-		if(session.getAttribute("userID") != null) {
+		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
+		int pageNumber = 1;
+		if (request.getParameter("pageNumber") != null) {
+			pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+		}
 	%>
-	<nav class="navbar navbar-default">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expanded="false">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="main.jsp">Companet</a>
-		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-			<li><a href="main.jsp">메인</a></li>
-			<li class="active">
-					<a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">인력수급<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li class="active"><a href="com_app.jsp">회사소속</a></li>
-						<li><a href="free_app.jsp">프리랜서</a></li>
-					</ul>
-			</li>
-			<li class="dropdown">
-					<a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">인력제공<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="com_pro.jsp">회사소속</a></li>
-						<li><a href="free_pro.jsp">프리랜서</a></li>
-					</ul>
-			</li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0 mr-auto" id="my_searchbar">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
-			
-			<%
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="main.jsp">Companet</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">인력수급</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item active" href="com_app.jsp">회사</a>
+              <a class="dropdown-item" href="free_app.jsp">프리랜서</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">인력제공</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="com_pro.jsp">회사</a>
+              <a class="dropdown-item" href="free_pro.jsp">프리랜서</a>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="pay.jsp">요금결제</a>
+          </li>
+        </ul>
+        <%
 				if (userID == null) {
 			%>
 			<script>
-				location.href="login.jsp";
+				location.href = "login.jsp";
 			</script>
-				<!-- <ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">접속하기<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="login.jsp">로그인</a></li>
-						<li><a href="join.jsp">회원가입</a></li>
-					</ul>
-				</li>
-			</ul> -->
+
 			<%
 				} else {
 			%>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">내정보<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">마이페이지</a></li>
-							<li><a href="logoutAction.jsp">로그아웃</a></li>
-						</ul>
-					</li>
-				</ul>
-			<%
+        <ul class="navbar-nav ml-auto">
+          	<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">마이페이지</a>
+            <div class="dropdown-menu" aria-labelledby="dropdownId">
+              <a class="dropdown-item" href="sendMessage.jsp">쪽지함</a>
+              <a class="dropdown-item" href="logoutAction.jsp">로그아웃</a>
+            </div>
+          </li>
+          </ul>
+          <%
 				}
 			%>
+      </div>
+    </div>
+  </nav>
+	<!-- <div class="container">
+		<div class="row align-items-center my-5">
+
+			 <form method="post" action="write_c_a_Action.jsp">
+				<table class="table table-hover" style="text-align: center; border: 1px solid #dddddd">
+					<thead>
+						<tr>
+							<th colspan="2" style="background-color:#eeeeee; text-align:center;">인력수급-회사</th>
+						</tr>
+					</thead>
+				</table>
+			</form>
 		</div>
-	</nav>
+	</div> -->
 	<div class="container">
-		<div class="row">
+		<div class="align-items-center my-5">
 		<form method="post" action="write_c_a_Action.jsp">
 			<table class="table table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
@@ -113,20 +121,14 @@
 					</tr>
 				</tbody>
 			</table>
-			<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
+			<input type="submit" class="btn btn-primary mr-auto" value="글쓰기">
 		</form>
-		<!-- <form method="post" action="upload.jsp" enctype="multipart/form-data">
-				<table class="table table-hover" style="text-align: left; border: 1px solid #dddddd">
-					<tr>
-						<td><input type="file" name="file"></td>
-					</tr>
-				</table>
-			<input type="submit" class="btn btn-primary pull-right" value="글쓰기">
-		</form>  -->
-		</div>
+			</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

@@ -45,7 +45,4 @@ public class User {
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
 	}
-	
-	
-	
 }

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import free_app.Free_app;
+import free_pro.Free_pro;
 
 public class f_p_DAO {
 	
@@ -39,7 +39,7 @@ public class f_p_DAO {
 		return "";
 	}
 	
-	public int getNext() {
+	public int getNext() { //다음글 번호
 		String SQL = "SELECT free_pro_ID FROM FREE_PRO ORDER BY free_pro_ID DESC";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
@@ -95,7 +95,7 @@ public class f_p_DAO {
 	}
 	
 	public boolean nextPage(int pageNumber) {
-		String SQL = "SELECT * FROM FREE_PRO WHERE free_pro_ID < ? AND free_pro_Available = 1";
+		String SQL = "SELECT * FROM free_pro WHERE free_pro_ID < ? AND free_pro_Available = 1";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
@@ -110,7 +110,7 @@ public class f_p_DAO {
 	}
 	
 	public Free_pro getFree_pro(int free_pro_ID) {
-		String SQL = "SELECT * FROM FREE_PRO WHERE free_pro_ID = ?";
+		String SQL = "SELECT * FROM free_pro WHERE free_pro_ID = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, free_pro_ID);

@@ -1,7 +1,11 @@
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="free_pro.f_p_DAO" %>
 <%@ page import="java.io.PrintWriter" %>
+<%-- <%@ page import="file.FileDAO" %>
+<%@ page import="java.io.File" %> --%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <jsp:useBean id="freepro" class="free_pro.Free_pro" scope="page"/>
 <jsp:setProperty name="freepro" property="free_pro_Title"/>
@@ -48,6 +52,21 @@
 				script.println("</script>");
 			}
 		}
+		
+		/* String directory = request.getServletContext().getRealPath("/upload/");
+		
+		int maxsize = 100*1024*1024;
+		String encoding = "UTF-8";
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request, directory, maxsize, encoding, new DefaultFileRenamePolicy());
+		
+		String fileName = multipartRequest.getOriginalFileName("file");
+		String fileRealName = multipartRequest.getFilesystemName("file");
+		
+		new FileDAO().upload(fileName, fileRealName);
+		out.write("파일명: " +fileName + "<br>");
+		out.write("실제 파일명: " +fileRealName + "<br>");	 */
+	
 	%>
 </body>
 </html>

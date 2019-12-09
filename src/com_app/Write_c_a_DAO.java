@@ -131,6 +131,28 @@ public class Write_c_a_DAO {
 		return null;
 	}
 	
+	public Com_app getM_Comapp(String userID) {
+		String SQL = "SELECT * FROM com_app WHERE com_app_ID = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				Com_app comapp = new Com_app();
+				comapp.setCom_app_ID(rs.getInt(1));
+				comapp.setCom_app_Title(rs.getString(2));
+				comapp.setUserID(rs.getString(3));
+				comapp.setCom_app_Date(rs.getString(4));
+				comapp.setCom_app_Content(rs.getString(5));
+				comapp.setCom_app_Available(rs.getInt(6));
+				return comapp;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public int update(int com_app_ID, String com_app_Title, String com_app_Content) {
 		String SQL = "UPDATE COM_APP SET com_app_Title = ?, com_app_Content = ? WHERE com_app_ID = ?";
 		try {
